@@ -1,0 +1,1503 @@
+/* ============================================================
+   PACHO MYSTERY — Global Styles
+   Dark mystery aesthetic with aged paper, crime scene motifs
+   ============================================================ */
+
+:root {
+  --bg-dark: #080705;
+  --bg-page: #0d0b07;
+  --bg-card: #16120a;
+  --bg-card-alt: #1c1710;
+  --bg-input: #0f0d08;
+  --bg-solved: #071510;
+
+  --text-primary: #e8d5b0;
+  --text-secondary: #9a8a6a;
+  --text-muted: #5a4f38;
+  --text-code: #d4b483;
+
+  --accent-red: #8b1a1a;
+  --accent-red-bright: #c0392b;
+  --accent-gold: #c9a84c;
+  --accent-gold-dim: #8a6f2e;
+  --accent-amber: #d4691e;
+  --accent-solved: #3d8b57;
+  --accent-solved-bright: #5dba72;
+
+  --border-dark: #2a2218;
+  --border-mid: #3e3220;
+  --border-gold: #5a4820;
+  --border-solved: #2d6a42;
+  --border-red: #5a1515;
+
+  --shadow-dark: 0 4px 24px rgba(0, 0, 0, 0.8);
+  --shadow-red: 0 0 20px rgba(139, 26, 26, 0.3);
+  --shadow-gold: 0 0 20px rgba(201, 168, 76, 0.2);
+  --shadow-solved: 0 0 20px rgba(61, 139, 87, 0.3);
+
+  --font-heading: "Cinzel", serif;
+  --font-body: "Crimson Text", serif;
+  --font-mono: "Courier Prime", monospace;
+
+  --transition: 0.3s ease;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 1;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+code,
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-gold);
+  border-radius: 3px;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  9% {
+    opacity: 0.4;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  51% {
+    opacity: 0.7;
+  }
+  52% {
+    opacity: 1;
+  }
+}
+
+@keyframes redPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(139, 26, 26, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(192, 57, 43, 0.6);
+  }
+}
+
+@keyframes goldPulse {
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(201, 168, 76, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 25px rgba(201, 168, 76, 0.7);
+  }
+}
+
+@keyframes solvedGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(61, 139, 87, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(93, 186, 114, 0.5);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-4px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes unlockReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes bloodDrip {
+  0% {
+    height: 0;
+    opacity: 1;
+  }
+  80% {
+    height: 40px;
+    opacity: 1;
+  }
+  100% {
+    height: 40px;
+    opacity: 0;
+  }
+}
+
+/* ============================================================
+   PAGE LAYOUT
+   ============================================================ */
+.page-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* ============================================================
+   HEADER / HERO
+   ============================================================ */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem 3rem;
+  position: relative;
+  border-bottom: 1px solid var(--border-red);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-red),
+    transparent
+  );
+}
+
+.case-number {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-red);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  animation: flicker 8s infinite;
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  animation: goldPulse 4s ease-in-out infinite;
+}
+
+.hero-title span {
+  color: var(--accent-red-bright);
+  display: block;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  margin-top: 1rem;
+}
+
+.hero-tape {
+  display: inline-block;
+  background: var(--accent-gold-dim);
+  color: var(--bg-dark);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  padding: 0.25rem 2rem;
+  margin-top: 1.5rem;
+  transform: rotate(-1deg);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   IMAGE PLACEHOLDER
+   ============================================================ */
+.image-placeholder {
+  border: 2px dashed var(--border-gold);
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--border-dark);
+  pointer-events: none;
+}
+
+.image-placeholder-icon {
+  font-size: 2.5rem;
+  opacity: 0.3;
+}
+
+.image-placeholder-label {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.image-placeholder-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.image-polaroid {
+  background: #e8e0d0;
+  padding: 0.75rem 0.75rem 2.5rem;
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
+  transform: rotate(-2deg);
+  display: inline-block;
+  color: #555;
+}
+
+.image-polaroid .image-placeholder {
+  border-color: #bbb;
+  background: #d8d0c0;
+  min-height: 160px;
+  min-width: 160px;
+  color: #888;
+}
+
+.image-polaroid-caption {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #777;
+  margin-top: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+/* ============================================================
+   STORY SECTION
+   ============================================================ */
+.story-section {
+  padding: 3rem 0;
+  animation: fadeInUp 1s ease both;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--accent-gold);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-gold), transparent);
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.story-text p {
+  margin-bottom: 1.2rem;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.story-text p:first-child::first-letter {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--accent-red-bright);
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.15rem;
+  margin-top: 0.1rem;
+}
+
+.story-highlight {
+  background: linear-gradient(
+    90deg,
+    rgba(139, 26, 26, 0.15),
+    rgba(139, 26, 26, 0.05)
+  );
+  border-left: 3px solid var(--accent-red);
+  padding: 1rem 1.2rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.suspects-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-mid);
+  padding: 1.25rem;
+}
+
+.suspects-panel-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.suspect-item {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+  align-items: flex-start;
+}
+
+.suspect-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  margin-top: 0.45rem;
+  flex-shrink: 0;
+}
+
+.suspect-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  display: block;
+}
+
+.suspect-role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   IMAGES GRID (story section)
+   ============================================================ */
+.story-images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 640px) {
+  .story-images {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ============================================================
+   EVIDENCE BOARD
+   ============================================================ */
+.evidence-board {
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-mid);
+  border-top: 3px solid var(--accent-red);
+  padding: 1.5rem;
+  margin: 2rem 0 3rem;
+  animation: fadeInUp 1.2s ease both;
+}
+
+.evidence-board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.evidence-board-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.evidence-board-status {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.evidence-digits {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 500px) {
+  .evidence-digits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.evidence-digit-card {
+  background: var(--bg-input);
+  border: 1px solid var(--border-dark);
+  padding: 0.9rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.evidence-digit-card.revealed {
+  border-color: var(--accent-gold-dim);
+  background: rgba(201, 168, 76, 0.05);
+  animation: solvedGlow 3s ease-in-out infinite;
+}
+
+.evidence-digit-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.evidence-digit-number {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.evidence-digit-number.revealed {
+  color: var(--accent-gold);
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.5);
+}
+
+.evidence-digit-word {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-solved-bright);
+  letter-spacing: 0.1em;
+  margin-top: 0.3rem;
+  min-height: 1em;
+}
+
+/* ============================================================
+   PUZZLE WRAPPER
+   ============================================================ */
+.puzzle-wrapper {
+  margin-bottom: 2.5rem;
+}
+
+.puzzle-locked {
+  opacity: 0.3;
+  pointer-events: none;
+  filter: blur(1px);
+  user-select: none;
+}
+
+.puzzle-unlocked {
+  animation: unlockReveal 0.8s ease both;
+}
+
+/* ============================================================
+   PUZZLE CARD
+   ============================================================ */
+.puzzle-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-mid);
+  position: relative;
+  overflow: hidden;
+}
+
+.puzzle-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-red),
+    var(--accent-gold-dim),
+    var(--accent-red)
+  );
+}
+
+.puzzle-card.solved {
+  border-color: var(--border-solved);
+  background: var(--bg-solved);
+  animation: solvedGlow 4s ease-in-out infinite;
+}
+
+.puzzle-card.solved::before {
+  background: linear-gradient(
+    90deg,
+    var(--accent-solved),
+    var(--accent-solved-bright),
+    var(--accent-solved)
+  );
+}
+
+.puzzle-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-dark);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.puzzle-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-red);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.puzzle-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+}
+
+.puzzle-solved-badge {
+  background: rgba(61, 139, 87, 0.2);
+  border: 1px solid var(--border-solved);
+  color: var(--accent-solved-bright);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  padding: 0.3rem 0.75rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.puzzle-body {
+  padding: 1.5rem;
+}
+
+.puzzle-context {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dashed var(--border-dark);
+}
+
+/* ============================================================
+   CIPHER / CODE DISPLAY
+   ============================================================ */
+.cipher-display {
+  background: var(--bg-input);
+  border: 1px solid var(--border-dark);
+  padding: 1.5rem;
+  margin: 1.25rem 0;
+  text-align: center;
+  position: relative;
+}
+
+.cipher-display::before,
+.cipher-display::after {
+  content: "///";
+  position: absolute;
+  top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+.cipher-display::before {
+  left: 0.5rem;
+}
+.cipher-display::after {
+  right: 0.5rem;
+}
+
+.cipher-code {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.3em;
+  word-break: break-all;
+}
+
+.cipher-sublabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   CLUE NOTES
+   ============================================================ */
+.clue-notes {
+  background: #1a160c;
+  border: 1px solid var(--border-mid);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+  position: relative;
+}
+
+.clue-notes::before {
+  content: "NOTAS DEL DETECTIVE";
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  color: var(--accent-red);
+  display: block;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dotted var(--border-dark);
+}
+
+.clue-item {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.95rem;
+}
+
+.clue-item:last-child {
+  margin-bottom: 0;
+}
+
+.clue-number {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-red);
+  background: rgba(139, 26, 26, 0.2);
+  border: 1px solid var(--border-red);
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.clue-text {
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.clue-text strong {
+  color: var(--accent-gold);
+}
+
+/* ============================================================
+   INPUTS & BUTTONS
+   ============================================================ */
+.input-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.puzzle-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-mid);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  width: 240px;
+  letter-spacing: 0.1em;
+  transition: var(--transition);
+  outline: none;
+  text-transform: uppercase;
+}
+
+.puzzle-input:focus {
+  border-color: var(--accent-gold-dim);
+  box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.1);
+}
+
+.puzzle-input.error {
+  border-color: var(--accent-red-bright);
+  animation: shake 0.5s ease;
+}
+
+.puzzle-input.correct {
+  border-color: var(--accent-solved);
+  background: rgba(61, 139, 87, 0.08);
+}
+
+.btn {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.25rem;
+  border: 1px solid;
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+}
+
+.btn-primary {
+  background: rgba(139, 26, 26, 0.2);
+  border-color: var(--accent-red);
+  color: var(--accent-red-bright);
+}
+
+.btn-primary:hover {
+  background: rgba(139, 26, 26, 0.4);
+  box-shadow: var(--shadow-red);
+}
+
+.btn-hint {
+  background: transparent;
+  border-color: var(--border-gold);
+  color: var(--accent-gold-dim);
+  font-size: 0.7rem;
+}
+
+.btn-hint:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.btn-submit-code {
+  background: rgba(61, 139, 87, 0.15);
+  border-color: var(--accent-solved);
+  color: var(--accent-solved-bright);
+}
+
+.btn-submit-code:hover {
+  background: rgba(61, 139, 87, 0.3);
+  box-shadow: var(--shadow-solved);
+}
+
+/* ============================================================
+   HINT BOX
+   ============================================================ */
+.hint-section {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.hint-box {
+  background: rgba(201, 168, 76, 0.05);
+  border: 1px solid var(--border-gold);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  width: 100%;
+  animation: fadeIn 0.5s ease;
+}
+
+.hint-box-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-gold-dim);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+/* ============================================================
+   FEEDBACK MESSAGES
+   ============================================================ */
+.feedback-error {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-red-bright);
+  margin-top: 0.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.feedback-success {
+  background: rgba(61, 139, 87, 0.12);
+  border: 1px solid var(--border-solved);
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+  animation: fadeInUp 0.6s ease both;
+}
+
+.feedback-success-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-solved-bright);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.feedback-success-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.feedback-success-digit {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--accent-gold);
+  display: inline-block;
+  margin: 0 0.2rem;
+}
+
+/* ============================================================
+   LOGIC GRID (Puzzle 2)
+   ============================================================ */
+.logic-grid-container {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
+
+.logic-grid {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 500px;
+}
+
+.logic-grid th,
+.logic-grid td {
+  border: 1px solid var(--border-dark);
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.logic-grid th {
+  background: var(--bg-input);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold-dim);
+  text-transform: uppercase;
+}
+
+.logic-grid th:first-child {
+  text-align: left;
+  color: var(--accent-red);
+}
+
+.logic-grid td:first-child {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  text-align: left;
+  background: var(--bg-input);
+  padding-left: 0.75rem;
+}
+
+.grid-cell {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 2px;
+  transition: var(--transition);
+  user-select: none;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.grid-cell:hover {
+  background: var(--bg-card-alt);
+  border-color: var(--border-gold) !important;
+}
+
+.grid-cell.yes {
+  background: rgba(61, 139, 87, 0.2);
+  color: var(--accent-solved-bright);
+  font-weight: bold;
+}
+
+.grid-cell.no {
+  background: rgba(139, 26, 26, 0.15);
+  color: var(--accent-red-bright);
+}
+
+/* ============================================================
+   PHONE KEYPAD (Puzzle 3)
+   ============================================================ */
+.phone-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 1.25rem 0;
+}
+
+.phone-display {
+  background: #080b0a;
+  border: 2px solid #2a3a2a;
+  padding: 1rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  letter-spacing: 0.3em;
+  color: #7bc67e;
+  min-width: 180px;
+  min-height: 56px;
+  text-shadow: 0 0 8px rgba(123, 198, 126, 0.5);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.phone-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  background: #1a1a1a;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #333;
+}
+
+.phone-key {
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  color: #e0e0e0;
+  cursor: pointer;
+  padding: 0.6rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.1s;
+  text-align: center;
+  user-select: none;
+}
+
+.phone-key:hover {
+  background: #3a3a3a;
+}
+
+.phone-key:active {
+  background: #1a3a2a;
+}
+
+.phone-key.active {
+  background: #0d2a1a;
+  border-color: #3a8a4a;
+  box-shadow: 0 0 8px rgba(60, 140, 74, 0.4);
+}
+
+.phone-key-number {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+}
+
+.phone-key-letters {
+  font-size: 0.5rem;
+  color: #888;
+  letter-spacing: 0.1em;
+  display: block;
+}
+
+.phone-key.wide {
+  grid-column: span 1;
+}
+
+.phone-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.phone-clear-btn {
+  background: #2a1a1a;
+  border: 1px solid #4a2a2a;
+  color: #c07070;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  border-radius: 3px;
+  letter-spacing: 0.1em;
+}
+
+.phone-clear-btn:hover {
+  background: #3a2020;
+}
+
+.phone-commit-btn {
+  background: #1a2a1a;
+  border: 1px solid #2a4a2a;
+  color: #70c070;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  border-radius: 3px;
+  letter-spacing: 0.1em;
+}
+
+.phone-helper {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--bg-input);
+  border: 1px solid var(--border-dark);
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.phone-helper span {
+  color: var(--accent-gold-dim);
+}
+
+/* ============================================================
+   RIDDLE (Puzzle 4)
+   ============================================================ */
+.riddle-container {
+  background: #100d08;
+  border: 1px solid var(--border-mid);
+  padding: 1.5rem;
+  margin: 1.25rem 0;
+  position: relative;
+}
+
+.riddle-container::before {
+  content: "❝";
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
+  font-size: 3rem;
+  color: var(--accent-red);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.riddle-intro {
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.riddle-lines {
+  list-style: none;
+  padding: 0;
+}
+
+.riddle-line {
+  padding: 0.5rem 0.75rem;
+  border-left: 2px solid var(--border-red);
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.riddle-line:hover {
+  border-left-color: var(--accent-gold);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.riddle-line em {
+  color: var(--accent-gold);
+  font-style: normal;
+}
+
+/* ============================================================
+   FINAL CODE (Puzzle 5)
+   ============================================================ */
+.final-puzzle-wrapper {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.code-instruction {
+  background: var(--bg-input);
+  border: 1px solid var(--border-mid);
+  padding: 1.5rem;
+  margin: 1.25rem 0;
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  position: relative;
+}
+
+.code-instruction strong {
+  color: var(--accent-gold);
+  font-style: normal;
+}
+
+.code-steps {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.code-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed var(--border-dark);
+  font-size: 0.95rem;
+}
+
+.code-step:last-child {
+  border-bottom: none;
+}
+
+.code-step-arrow {
+  color: var(--accent-red);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+.code-step-text {
+  color: var(--text-primary);
+}
+
+.code-step-digit {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.code-input-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.code-digit-input {
+  width: 3.5rem;
+  height: 4.5rem;
+  background: var(--bg-input);
+  border: 2px solid var(--border-mid);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  text-align: center;
+  outline: none;
+  transition: var(--transition);
+  caret-color: var(--accent-gold);
+}
+
+.code-digit-input:focus {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
+
+.code-digit-input.error {
+  border-color: var(--accent-red-bright);
+  animation: shake 0.5s ease;
+}
+
+.code-digit-input.correct-digit {
+  border-color: var(--accent-solved);
+  background: rgba(61, 139, 87, 0.1);
+  color: var(--accent-gold);
+}
+
+/* ============================================================
+   VICTORY SCREEN
+   ============================================================ */
+.victory-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease;
+  padding: 2rem;
+}
+
+.victory-card {
+  background: var(--bg-card);
+  border: 2px solid var(--accent-gold);
+  max-width: 560px;
+  width: 100%;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(201, 168, 76, 0.3), 0 0 120px rgba(201, 168, 76, 0.1);
+  animation: fadeInUp 0.8s ease both;
+}
+
+.victory-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.victory-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+}
+
+.victory-culprit {
+  font-size: 2.5rem;
+  color: var(--accent-red-bright);
+  font-weight: 900;
+  font-family: var(--font-heading);
+  margin: 0.5rem 0;
+}
+
+.victory-text {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 1.25rem 0;
+  line-height: 1.7;
+}
+
+.victory-code-display {
+  background: var(--bg-input);
+  border: 1px solid var(--accent-gold);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.victory-code-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.victory-code-number {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--accent-gold);
+  letter-spacing: 0.5rem;
+  text-shadow: 0 0 30px rgba(201, 168, 76, 0.7);
+  animation: goldPulse 2s ease-in-out infinite;
+}
+
+.victory-close-btn {
+  margin-top: 1rem;
+  background: rgba(139, 26, 26, 0.2);
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red-bright);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.victory-close-btn:hover {
+  background: rgba(139, 26, 26, 0.4);
+}
+
+/* ============================================================
+   SEPARATOR
+   ============================================================ */
+.mystery-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem 0;
+  color: var(--text-muted);
+}
+
+.mystery-divider::before,
+.mystery-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-mid));
+}
+
+.mystery-divider::after {
+  background: linear-gradient(90deg, var(--border-mid), transparent);
+}
+
+.mystery-divider-icon {
+  font-size: 1.2rem;
+  opacity: 0.4;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.page-footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border-dark);
+  margin-top: 4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+}
