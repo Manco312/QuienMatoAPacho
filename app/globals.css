@@ -1501,3 +1501,131 @@ code,
   color: var(--text-muted);
   letter-spacing: 0.15em;
 }
+
+/* ============================================================
+   MOBILE RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  body {
+    font-size: 1rem;
+  }
+
+  .page-wrapper {
+    padding: 0 0.85rem 2.5rem;
+  }
+
+  .hero {
+    padding: 2rem 0.5rem 1.75rem;
+  }
+
+  .hero-tape {
+    padding: 0.25rem 1rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+  }
+
+  /* Reduce drop cap on mobile to avoid layout break */
+  .story-text p:first-child::first-letter {
+    font-size: 2.5rem;
+  }
+
+  /* Input + button row: stack vertically */
+  .input-row {
+    flex-direction: column;
+  }
+
+  .puzzle-input {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Phone keypad */
+  .phone-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .phone-display {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .phone-keypad {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  /* Evidence board: 2 columns on mobile */
+  .evidence-digits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Puzzle body padding */
+  .puzzle-body {
+    padding: 1rem;
+  }
+
+  .puzzle-header {
+    padding: 1rem;
+  }
+
+  /* Cipher code smaller on mobile */
+  .cipher-code {
+    font-size: 1.2rem;
+    letter-spacing: 0.15em;
+  }
+
+  /* Victory overlay: scrollable, less padding */
+  .victory-overlay {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 1rem 0.75rem;
+  }
+
+  .victory-card {
+    padding: 1.5rem 1.25rem;
+    margin: auto;
+  }
+
+  .victory-title {
+    font-size: 1.3rem;
+  }
+
+  .victory-culprit {
+    font-size: 1.75rem;
+  }
+
+  .victory-text {
+    font-size: 0.9rem;
+  }
+
+  .victory-code-number {
+    font-size: 2.5rem;
+    letter-spacing: 0.3rem;
+  }
+
+  .victory-code-display {
+    padding: 1rem;
+  }
+
+  /* Code digit inputs */
+  .code-digit-input {
+    width: 3rem;
+    height: 4rem;
+    font-size: 1.75rem;
+  }
+
+  /* Hint section */
+  .hint-section {
+    align-items: stretch;
+  }
+
+  .btn-hint {
+    width: 100%;
+    text-align: center;
+  }
+}
